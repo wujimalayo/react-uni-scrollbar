@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ES2020",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "outDir": "./dist",
+    "jsx": "react",
+    "esModuleInterop": true,
+    // 跳过对所有声明文件（.d.ts）的类型检查
+    // "skipLibCheck": true,
+    // 强制文件名大小写一致性
+    // "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
