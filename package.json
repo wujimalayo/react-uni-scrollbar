@@ -1,24 +1,28 @@
 {
   "name": "react-uni-scrollbar",
   "version": "1.0.11",
-  "description": "",
+  "description": "A React component to replace native browser scrollbars with customizable styles.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "react",
     "scrollbar",
     "react-scrollbar",
     "uni-scrollbar"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wujimalayo/react-uni-scrollbar.git"
+  },
   "author": "wujimalayo",
   "license": "ISC",
+  "scripts": {
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
