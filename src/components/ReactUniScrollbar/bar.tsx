@@ -32,6 +32,8 @@ const Bar = ({
 }: BarProps) => {
   const bar = useMemo(() => BAR_MAP[type], []);
   const isMouseDown = useRef(false);
+  // 当前滚动的距离
+  const scrollDistance = useRef(translateValue / ratio);
 
   const handleClickTrack = (e: MouseEvent) => {
     document.onselectstart = () => false;
@@ -43,6 +45,7 @@ const Bar = ({
       const scrollRatio = (offset - halfThumb) / sizeInfo[bar.wrapperLength];
       scroll = scrollRatio * sizeInfo[bar.contentLength];
     }
+    scrollDistance.current = scroll;
     onScroll(scroll, bar.scroll);
   };
 
@@ -65,15 +68,14 @@ const Bar = ({
     document.onselectstart = () => false;
   };
 
-  // 当前滚动的距离
-  const scrollDistance = useRef(translateValue / ratio);
-
   const mouseMoveDocumentHandler = (e: any) => {
     if (isMouseDown.current === false) return;
     const event = e as MouseEvent;
     const distance = scrollDistance.current + event[bar.movement] / ratio;
     // 计算后的滚动距离小于0则不需要触发更新
     if (distance <= 0) return;
+    // 计算后的滚动距离大于可滚动的最大值也不需要触发更新
+    if (distance >= (sizeInfo[bar.contentLength] - 4) * (1 - ratio)) return;
     scrollDistance.current =
       scrollDistance.current + event[bar.movement] / ratio;
     onScroll(scrollDistance.current, bar.scroll);
