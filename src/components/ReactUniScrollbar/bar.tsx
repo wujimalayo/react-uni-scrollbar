@@ -53,7 +53,7 @@ const Bar = ({
     e.stopPropagation();
     // 拦截ctrl建和鼠标滚轮、右键的事件响应
     if (e.ctrlKey || [1, 2].includes(e.button)) return;
-
+    // 清除当前选中内容
     window.getSelection()?.removeAllRanges();
     startDrag(e);
   };
@@ -61,6 +61,8 @@ const Bar = ({
   const startDrag = (e: MouseEvent) => {
     e.nativeEvent.stopImmediatePropagation();
     isMouseDown.current = true;
+    // 更新当前滚动距离
+    scrollDistance.current = translateValue / ratio;
     document.addEventListener("mousemove", mouseMoveDocumentHandler);
     document.addEventListener("mouseup", mouseUpDocumentHandler);
     // 绑定当前上下文
