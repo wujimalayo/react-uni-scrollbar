@@ -13,6 +13,7 @@ import Bar from "./bar";
 interface props {
   height?: number;
   maxHeight?: number;
+  style?: CSSProperties;
   wraperStyle?: CSSProperties;
   contentStyle?: CSSProperties;
   children?: ReactNode;
@@ -22,6 +23,7 @@ const UniScrollBar = ({
   children,
   height,
   maxHeight,
+  style,
   wraperStyle,
   contentStyle,
 }: props) => {
@@ -77,6 +79,7 @@ const UniScrollBar = ({
 
   return (
     <div
+      style={style}
       className={"uni-scrollbar"}
       onPointerEnter={() => setHiddenBar(false)}
       onPointerLeave={() => setHiddenBar(true)}
