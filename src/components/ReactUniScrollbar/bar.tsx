@@ -16,11 +16,7 @@ interface BarProps {
 let originalOnSelectStart:
   | ((this: GlobalEventHandlers, ev: Event) => any)
   | null = document.onselectstart;
-
-/**
- * @type 'vertical'纵向 |'horizontal' 横向
- * @ratio 滑块长度占比
- *  */
+  
 const Bar = ({
   type,
   ratio,

@@ -6,6 +6,7 @@
   .uni-scrollbar-wrapper {
     overflow: auto;
     height: 100%;
+    scrollbar-width: none;
 
     .uni-scrollbar-content {
       width: fit-content;
@@ -25,46 +26,49 @@
     position: absolute;
     right: 2px;
     bottom: 2px;
-    background-color: rgba($color: #000000, $alpha: 0.1);
+    background-color: var(--uniscrollbar-track-background-color);
     z-index: 1;
-    border-radius: 4px;
+    border-radius: var(--uniscrollbar-track-border-radius);
     transition-property: opacity;
-    transition-duration: 0.35s;
+    transition-duration: 0.2s;
     transition-timing-function: ease-out;
+    &:hover {
+      background-color: var(--uniscrollbar-track-hover-background-color);
+    }
   }
 
   .uni-scrollbar-bar-thumb {
-    width: 6px;
-    border-radius: 4px;
-    background-color: rgba($color: #000000, $alpha: 0.25);
+    border-radius: var(--uniscrollbar-track-border-radius);
+    background-color: var(--uniscrollbar-thumb-background-color);
     cursor: pointer;
     transition-property: background-color;
     transition-duration: 0.35s;
     transition-timing-function: ease-out;
     &:hover {
-      background-color: rgba($color: #000000, $alpha: 0.45);
+      background-color: var(--uniscrollbar-thumb-hover-background-color);
     }
   }
 
   .uni-scrollbar-vertical {
-    width: 6px;
+    width: var(--uniscrollbar-track-width);
     top: 2px;
 
     .uni-scrollbar-bar-thumb {
-      width: 6px;
+      width: var(--uniscrollbar-thumb-width);
     }
   }
 
   .uni-scrollbar-horizontal {
-    height: 6px;
+    height: var(--uniscrollbar-track-width);
     left: 2px;
 
     .uni-scrollbar-bar-thumb {
-      height: 6px;
+      height: var(--uniscrollbar-thumb-width);
     }
   }
 
   .uni-scrollbar-bar__hidden {
     opacity: 0;
+    transition-duration: 0.4s;
   }
 }

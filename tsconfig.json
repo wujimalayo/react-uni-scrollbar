@@ -6,7 +6,9 @@
     "declarationDir": "./dist/types",
     "outDir": "./dist",
     "jsx": "react",
-    "esModuleInterop": true,
+    // 按照 Node.js 的模块解析规则查找依赖
+    "moduleResolution": "node",
+    "esModuleInterop": true
     // 跳过对所有声明文件（.d.ts）的类型检查
     // "skipLibCheck": true,
     // 强制文件名大小写一致性
