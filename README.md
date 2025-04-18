@@ -2,9 +2,10 @@
 
 A React component to replace native browser scrollbars with customizable styles.
 
-# use
-
+# Usage
+```
 npm install react-uni-scrollbar
+```
 
 ```javascript
 import { UniScrollbar } from "react-uni-scrollbar";
