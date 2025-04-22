@@ -16,7 +16,6 @@ interface BarProps {
 let originalOnSelectStart:
   | ((this: GlobalEventHandlers, ev: Event) => any)
   | null = document.onselectstart;
-  
 const Bar = ({
   type,
   ratio,
@@ -103,8 +102,8 @@ const Bar = ({
     <div
       onMouseDown={handleClickTrack}
       className={[
-        hidden && !isMouseDown.current && "uni-scrollbar-bar__hidden",
-        "uni-scrollbar-bar",
+        hidden && !isMouseDown.current && "uni-scrollbar-track__hidden",
+        "uni-scrollbar-track",
         `uni-scrollbar-${type}`,
       ]
         .filter(Boolean)
@@ -116,7 +115,7 @@ const Bar = ({
           [bar.size]: length,
           transform: `translate${bar.axis}(${translateValue}px)`,
         }}
-        className={"uni-scrollbar-bar-thumb"}
+        className={"uni-scrollbar-thumb"}
       ></div>
     </div>
   );

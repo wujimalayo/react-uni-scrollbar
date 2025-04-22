@@ -6,13 +6,10 @@
   .uni-scrollbar-wrapper {
     overflow: auto;
     height: 100%;
+    scrollbar-width: none;
 
     .uni-scrollbar-content {
       width: fit-content;
-    }
-
-    ::-webkit-scrollbar {
-      display: none;
     }
     /* 针对 Firefox */
     scrollbar-width: none;
@@ -21,7 +18,11 @@
     -ms-overflow-style: none;
   }
 
-  .uni-scrollbar-bar {
+  ::-webkit-scrollbar {
+    display: none!important;
+  }
+
+  .uni-scrollbar-track {
     position: absolute;
     right: 2px;
     bottom: 2px;
@@ -36,7 +37,7 @@
     }
   }
 
-  .uni-scrollbar-bar-thumb {
+  .uni-scrollbar-thumb {
     border-radius: var(--uniscrollbar-track-border-radius);
     background-color: var(--uniscrollbar-thumb-background-color);
     cursor: pointer;
@@ -52,7 +53,7 @@
     width: var(--uniscrollbar-track-width);
     top: 2px;
 
-    .uni-scrollbar-bar-thumb {
+    .uni-scrollbar-thumb {
       width: var(--uniscrollbar-thumb-width);
     }
   }
@@ -61,12 +62,12 @@
     height: var(--uniscrollbar-track-width);
     left: 2px;
 
-    .uni-scrollbar-bar-thumb {
+    .uni-scrollbar-thumb {
       height: var(--uniscrollbar-thumb-width);
     }
   }
 
-  .uni-scrollbar-bar__hidden {
+  .uni-scrollbar-track__hidden {
     opacity: 0;
     transition-duration: 0.4s;
   }
