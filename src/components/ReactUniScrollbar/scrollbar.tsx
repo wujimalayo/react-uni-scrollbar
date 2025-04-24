@@ -5,10 +5,12 @@ import React, {
   useMemo,
   useState,
   UIEventHandler,
+  useEffect,
 } from "react";
 import "./styles.scss";
 import useResizeObserver from "./hooks/useResizeObserver";
 import Bar from "./bar";
+import { GAP } from "./config";
 
 interface props {
   children?: ReactNode;
@@ -96,8 +98,8 @@ const UniScrollBar = ({
     const showHorizontalBar = contentWidth > wrapperWidth;
     const heightRatio = wrapperHeight / contentHeight;
     const widthRatio = wrapperWidth / contentWidth;
-    const thumbHeight = wrapperHeight * heightRatio;
-    const thumbWidth = wrapperWidth * widthRatio;
+    const thumbHeight = (wrapperHeight - 2 * GAP) * heightRatio;
+    const thumbWidth = (wrapperWidth - 2 * GAP) * widthRatio;
     return {
       showVerticalBar,
       showHorizontalBar,
@@ -118,12 +120,13 @@ const UniScrollBar = ({
   };
 
   const handleScroll: UIEventHandler<HTMLDivElement> = (e) => {
-    const Yalue = heightRatio * e.currentTarget.scrollTop;
-    const maxY = (wrapperHeight - 4) * (1 - heightRatio);
-    const Xalue = widthRatio * e.currentTarget.scrollLeft;
-    const maxX = (wrapperWidth - 4) * (1 - widthRatio);
-    setTranslateY(Yalue > maxY ? maxY : Yalue);
-    setTranslateX(Xalue > maxX ? maxX : Xalue);
+    const Yvalue = heightRatio * e.currentTarget.scrollTop;
+    const maxY = (wrapperHeight - 2 * GAP) * (1 - heightRatio);
+    const Xvalue = widthRatio * e.currentTarget.scrollLeft;
+    const maxX = (wrapperWidth - 2 * GAP) * (1 - widthRatio);
+
+    setTranslateY(Yvalue > maxY ? maxY : Yvalue);
+    setTranslateX(Xvalue > maxX ? maxX : Xvalue);
 
     handleShowBar();
   };
@@ -140,11 +143,26 @@ const UniScrollBar = ({
     return;
   };
 
+  const [contentMargin, setContentMargin] = useState({
+    marginVer: 0,
+    marginHor: 0,
+  });
+
+  useEffect(() => {
+    const { marginTop, marginBottom, marginLeft, marginRight } =
+      window.getComputedStyle((contentRef.current as HTMLElement).children[0]);
+    setContentMargin({
+      marginVer: parseFloat(marginTop) + parseFloat(marginBottom),
+      marginHor: parseFloat(marginLeft) + parseFloat(marginRight),
+    });
+  }, []);
+
   return (
     <div
       style={
         {
           ...style,
+          "--uniscrollbar-gap": `${GAP}px`,
           "--uniscrollbar-track-width": trackProps.width || "6px",
           "--uniscrollbar-track-border-radius":
             trackProps.borderRadius || "4px",
@@ -195,10 +213,9 @@ const UniScrollBar = ({
           length={thumbHeight}
           translateValue={translateY}
           sizeInfo={{
-            wrapperWidth,
             wrapperHeight,
-            contentWidth,
             contentHeight,
+            marginSum: contentMargin.marginVer,
           }}
           onScroll={setScroll}
         />
@@ -212,9 +229,8 @@ const UniScrollBar = ({
           translateValue={translateX}
           sizeInfo={{
             wrapperWidth,
-            wrapperHeight,
-            contentWidth,
             contentHeight,
+            marginSum: contentMargin.marginHor,
           }}
           onScroll={setScroll}
         />

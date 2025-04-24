@@ -1,6 +1,6 @@
 import { useState, useEffect, RefObject } from "react";
 
-const useResizeObserver = (elementRef:RefObject<HTMLElement | null>) => {
+const useResizeObserver = (elementRef: RefObject<HTMLElement | null>) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -8,10 +8,9 @@ const useResizeObserver = (elementRef:RefObject<HTMLElement | null>) => {
     if (!elementRef.current) return;
 
     const observer = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
-      }
+      const entry = entries[0];
+      const { width, height } = entry.contentRect;
+      setDimensions({ width, height });
     });
 
     // 开始观察 ref 当前指向的元素
@@ -26,4 +25,4 @@ const useResizeObserver = (elementRef:RefObject<HTMLElement | null>) => {
   return dimensions;
 };
 
-export default useResizeObserver
+export default useResizeObserver;

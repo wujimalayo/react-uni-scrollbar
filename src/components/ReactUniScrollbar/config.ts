@@ -1,3 +1,6 @@
+// 滚动条与边界的距离
+export const GAP = 4;
+
 export const BAR_MAP: {
   [key: string]: {
     scroll: "scrollTop" | "scrollLeft";
