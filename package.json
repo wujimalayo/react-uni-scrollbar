@@ -17,6 +17,7 @@
     "type": "git",
     "url": "https://github.com/wujimalayo/react-uni-scrollbar.git"
   },
+  "homepage": "https://github.com/wujimalayo",
   "author": "wujimalayo",
   "license": "ISC",
   "scripts": {
